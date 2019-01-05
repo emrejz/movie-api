@@ -123,6 +123,18 @@ const promise=Director.findByIdAndUpdate(
     })
 })
 
+router.delete('/:directorId',(req,res,next)=>{
+    const promise=Director.findByIdAndRemove(
+        req.params.directorId
+    )
+    promise.then(data=>{
+        if(!data)
+        next({message:"Incorrect director parameter", code:3})
+        res.json(data)
+    }).catch(err=>{
+        res.json(err)
+    })
+})
 
 module.exports=router;
 
