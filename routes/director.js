@@ -60,7 +60,7 @@ router.get("/",(req,res,next)=>{
 });
 
 router.get("/:directorId",(req,res,next)=>{
-    const director= Director.aggregate([
+    const promise= Director.aggregate([
         
         {
             $match:{
@@ -97,7 +97,7 @@ router.get("/:directorId",(req,res,next)=>{
         
     ])
  
-    director.then(data=>{
+    promise.then(data=>{
         res.json(data)
     })
     .catch(err=>{
@@ -105,7 +105,23 @@ router.get("/:directorId",(req,res,next)=>{
     })
 })
 
-
+router.put("/:directorId",(req,res,next)=>{
+const promise=Director.findByIdAndUpdate(
+    req.params.directorId,
+    req.body,
+    {
+        new: true
+    }
+    )
+    promise.then(data=>{
+        if(!data)
+        next({message:"The director was not found!",code:2})
+        res.json(data)
+        
+    }).catch(err=>{
+        res.json(err)
+    })
+})
 
 
 module.exports=router;
