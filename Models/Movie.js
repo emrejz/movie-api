@@ -2,9 +2,11 @@ const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
 const MovieSchema=new Schema({
+    director_id:Schema.Types.ObjectId,
     title:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     category:{
         type:String
@@ -18,9 +20,7 @@ const MovieSchema=new Schema({
     imdb_score:{
         type:Number
     },
-    director_id:{
-        type:Schema.Types.ObjectId
-    },
+
     createdAt:{
         type:Date,
         default:Date.now
