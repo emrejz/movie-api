@@ -4,10 +4,40 @@ const Director=require('../Models/Director');
 
 
 router.get("/",(req,res,next)=>{
-    const promise= Director.find({});
+    const promise= Director.aggregate([
+       { $lookup:{
+            from:'movies',
+            localField:'_id',
+            foreignField:'director_id',
+            as:'movies'
+        }},
+       { $unwind:{
+            path:"$movies",
+            preserveNullAndEmptyArrays: true
+        }},{
+        $group:{
+            _id:{
+                _id:'$_id',
+                name:'$name',
+                surname:'$surname'
+            },
+            movies:{
+                $push:'$movies'
+            }}
+           
+            },
+             {
+            $project:{
+                    _id:'$_id._id',
+                    name:'$_id.name',
+                    surname:'$_id.surname',
+                    movies:'$movies'
+                }
+        }
+
+    ]);
     promise.then(data=>{
-        if(!data)
-        next({message:"Director was not found!",code:1})
+      
         res.json(data)
     })
     .catch(err=>{
