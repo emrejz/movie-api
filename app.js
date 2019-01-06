@@ -8,6 +8,8 @@ const authenticateRouter = require('./routes/authenticate');
 const movieRouter = require('./routes/movie');
 const directorRouter=require("./routes/director")
 const registerRouter=require("./routes/register")
+const indexRouter=require("./routes/index")
+
 //middlevare verifyToken
 const verifyToken=require('./middleware/verify-token');
 
@@ -40,6 +42,7 @@ app.use('/api',verifyToken);
 app.use('/api/movies', movieRouter);
 app.use('/api/directors',directorRouter);
 app.use('/register',registerRouter);
+app.use('/',indexRouter);
 // app.use((err,req,res,nedxt)=>{
 //   res.status(err.status),
 //   res.render('error',        hata yönetimi yap
