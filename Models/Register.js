@@ -14,7 +14,7 @@ const Register=new Schema({
     password:{
         type:String,
         required:[true, '`{PATH}` alanı boş olamaz'],
-        minlength:[5, '`{PATH}` alanı min 5 karakter olabilir'],
+            minlength:[5, '`{PATH}` alanı min 5 karakter olabilir'],
         trim: true
     }
 })

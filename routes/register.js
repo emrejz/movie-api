@@ -15,7 +15,7 @@ router.post("/",(req,res)=>{
             password:hash
             
         }).save();
-        console.log(hash)
+   
         promise.then(data=>{
             res.json(data);
         })
@@ -25,5 +25,7 @@ router.post("/",(req,res)=>{
     });
     
 })
+
+
 
 module.exports=router;
