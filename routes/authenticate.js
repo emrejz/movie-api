@@ -4,7 +4,7 @@ const Register=require('../Models/Register');
 const bcrypt = require('bcrypt');
 const jwt=require('jsonwebtoken');
 
-router.post('/authenticate', (req, res, next)=> {
+router.post('/', (req, res, next)=> {
   const {username,password}=req.body;
   Register.findOne({
     username,

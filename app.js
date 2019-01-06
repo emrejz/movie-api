@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', authenticateRouter);
+app.use('/authenticate', authenticateRouter);
 app.use('/api',verifyToken);
 app.use('/api/movies', movieRouter);
 app.use('/api/directors',directorRouter);
