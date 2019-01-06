@@ -106,4 +106,16 @@
              })
          })
      })
+     describe("/DELETE/:movie_id",()=>{
+         it("delete movie by movie_id",(done)=>{
+             chai.request(server)
+             .delete("/api/movies/"+movie_id)
+             .set("x-access-token",token)
+             .end((err,res)=>{
+                 res.should.have.status(200);
+                 res.body.should.have.property("status").eql(1);
+                 done();
+             })
+         })
+     })
  	})
