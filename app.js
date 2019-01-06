@@ -8,6 +8,8 @@ const authenticateRouter = require('./routes/authenticate');
 const movieRouter = require('./routes/movie');
 const directorRouter=require("./routes/director")
 const registerRouter=require("./routes/register")
+//middlevare verifyToken
+const verifyToken=require('./middleware/verify-token');
 
 const app = express();
 
@@ -20,6 +22,9 @@ const config=require('./config');
 
 app.set('api_secret_key',config.api_secret_key);
 
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -31,6 +36,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', authenticateRouter);
+app.use('/api',verifyToken);
 app.use('/api/movies', movieRouter);
 app.use('/api/directors',directorRouter);
 app.use('/register',registerRouter);
