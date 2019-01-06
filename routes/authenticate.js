@@ -31,6 +31,8 @@ router.post('/', (req, res, next)=> {
               username
             };
             const token=jwt.sign(payLoad,req.app.get('api_secret_key'),
+            
+            
             {
               expiresIn:720 //12 saat  
             });

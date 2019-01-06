@@ -6,7 +6,7 @@ const MovieSchema=new Schema({
     title:{
         type:String,
         required:[true, '`{PATH}` alanı boş olamaz'],
-        unique:[true, '`{PATH}` alanı benzersiz olmalı'],
+       // unique:[true, '`{PATH}` alanı benzersiz olmalı'],
         maxlength:[30, '`{PATH}` alanı max 30 karakter olabilir'],
         minlength:[1, '`{PATH}` alanı min 1 karakter olabilir'],
         trim: true
