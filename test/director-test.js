@@ -4,7 +4,7 @@ const chaiHttp=require('chai-http');
  const should=chai.should();
 
 chai.use(chaiHttp);
-let token;
+let token,director_id;
 describe('/api/directors tests',()=>{
     before((done)=>{
         chai.request(server)
@@ -18,7 +18,7 @@ describe('/api/directors tests',()=>{
     })
    
     
-    describe("/GET movies",()=>{
+    describe("/GET director",()=>{
         it("GET all directors",(done)=>{
          
             chai.request(server)
@@ -31,5 +31,45 @@ describe('/api/directors tests',()=>{
            })
         })
    
+    })
+    describe("/POST director",()=>{
+        const director={
+            name:"TEST",
+            surname:"TEST"
+        }
+        it("POST director",(done)=>{
+            chai.request(server)
+            .post("/api/directors")
+            .send(director)
+            .set("x-access-token",token)
+            .end((err,res)=>{
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.property('name')
+                res.body.should.property('surname')
+                director_id=res.body._id;
+                done()
+
+            })
+        })
+    })
+    describe("/PUT/:directorId director",()=>{
+           const director={
+               name:"TEST2",
+               surname:"TEST2"
+           };
+        it("Update director by id",(done)=>{
+            chai.request(server)
+            .put("/api/directors/"+director_id)
+            .send(director)
+            .set("x-access-token",token)
+            .end((err,res)=>{
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('name').eql(director.name);
+                res.body.should.have.property('surname').eql(director.surname);
+                done();
+            })
+        })
     })
 })
