@@ -10,5 +10,6 @@ module.exports=()=>{
         console.log("mongodb: not connected");
         
     })
+    mongoose.set('useFindAndModify', false);
     mongoose.Promise=global.Promise;
 }

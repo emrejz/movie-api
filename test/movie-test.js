@@ -13,9 +13,7 @@
  			.send({username: 'test', password: 'test123'})
  			.end((err, res) => {
                  token = res.body.token;
-                 console.log(token);
-                 
- 				done();
+                 done();
  			});
  	});
 
