@@ -130,7 +130,7 @@ router.delete('/:directorId',(req,res,next)=>{
     promise.then(data=>{
         if(!data)
         next({message:"Incorrect director parameter", code:3})
-        res.json(data)
+        res.json({status:1})
     }).catch(err=>{
         res.json(err)
     })

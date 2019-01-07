@@ -26,7 +26,7 @@ describe('/api/directors tests',()=>{
            .set('x-access-token', token)
            .end((err,res)=>{
                res.should.have.status(200);
-               res.body.should.be.a('array')
+               res.body.should.be.a('array');
                done();
            })
         })
@@ -80,6 +80,23 @@ describe('/api/directors tests',()=>{
             .end((err,res)=>{
                 res.should.have.status(200);
                 res.body.should.be.a('array');
+                res.body[0].should.have.property('name');
+                res.body[0].should.have.property('surname');
+
+                
+                done();
+            })
+        })
+    })
+    describe("/api/directors/:directorId",()=>{
+        it("DELETE director by id",(done)=>{
+            chai.request(server)
+            .delete("/api/directors/"+director_id)
+            .set("x-access-token",token)
+            .end((err,res)=>{
+                res.should.have.status(200);
+                res.body.should.have.property("status").eql(1);
+               
                 done();
             })
         })
