@@ -45,8 +45,8 @@ describe('/api/directors tests',()=>{
             .end((err,res)=>{
                 res.should.have.status(200);
                 res.body.should.be.a('object');
-                res.body.should.property('name')
-                res.body.should.property('surname')
+                res.body.should.property('name');
+                res.body.should.property('surname');
                 director_id=res.body._id;
                 done()
 
@@ -68,6 +68,18 @@ describe('/api/directors tests',()=>{
                 res.body.should.be.a('object');
                 res.body.should.have.property('name').eql(director.name);
                 res.body.should.have.property('surname').eql(director.surname);
+                done();
+            })
+        })
+    })
+    describe("/GET/:directorId director",()=>{
+        it("GET director by id",(done)=>{
+            chai.request(server)
+            .get("/api/directors/"+director_id)
+            .set("x-access-token",token)
+            .end((err,res)=>{
+                res.should.have.status(200);
+                res.body.should.be.a('array');
                 done();
             })
         })
