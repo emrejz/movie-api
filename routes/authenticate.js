@@ -10,12 +10,12 @@ router.post('/', (req, res, next)=> {
     username,
   },(err,user)=>{
     if(err)
-    throw err;
+      next(err)
     if(!user){
       res.json({
         status:false,
         message:`Authentication failed,user not found!`
-      });}
+      })}
       else{
         bcrypt.compare(password,user.password)
         .then(result=>{
@@ -25,32 +25,26 @@ router.post('/', (req, res, next)=> {
             message:"Authentication failed,wrong password"
           })
           else{
-      
-            
             const payLoad={
               username
             };
-            const token=jwt.sign(payLoad,req.app.get('api_secret_key'),
-            
-            
+            jwt.sign(payLoad,process.env.API_SECRET_KEY,
             {
               expiresIn:720 //12 saat  
+            },(err,token)=>{
+              if(err){
+                next(err)}
+              else
+              res.json({
+                status:true,
+                token })
             });
-            res.json({
-              status:true,
-              token
-            })
-  
-            
           }
-        
         }).catch(err=>{
-         res.send(err)
+           next(err)
         })
       }
-    }
-  )
-
+    })
 });
 
 module.exports = router;

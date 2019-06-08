@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+require('dotenv').config();
 
 const authenticateRouter = require('./routes/authenticate');
 const movieRouter = require('./routes/movie');
@@ -18,14 +19,6 @@ const app = express();
 //db connection
 const db=require('./helper/db');
 db();
-
-//apiSecretKey
-const config=require('./config');
-
-app.set('api_secret_key',config.api_secret_key);
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
