@@ -107,7 +107,7 @@ router.post('/', (req, res, next)=> {
      res.json(data)
    })
    .catch((err)=>{
-     res.json(err)
+     next(err)
    })
    
 

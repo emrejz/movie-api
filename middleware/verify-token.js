@@ -2,7 +2,6 @@ const jwt=require('jsonwebtoken');
 
 module.exports=(req,res,next)=>{
     if(req && req.cookies["x-access-token"] && !req.headers["x-access-token"]){
-        console.log("emre")
         req.headers["x-access-token"]=req.cookies["x-access-token"]
     }
     const token= req.headers['x-access-token']  || req.body.token || req.query.token || req.token;
