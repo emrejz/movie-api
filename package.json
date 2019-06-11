@@ -5,7 +5,7 @@
   "scripts": {
     "start:dev": "nodemon ./bin/www",
     "start": "node ./bin/www",
-    "test": "./node_modules/.bin/mocha --exit --recursive"
+    "test": "./node_modules/.bin/mocha  --timeout 10000 --exit --recursive"
   },
   "dependencies": {
     "bcrypt": "^3.0.0",
@@ -13,7 +13,9 @@
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
+    "dotenv": "^8.0.0",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",

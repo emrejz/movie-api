@@ -6,9 +6,9 @@ const jwt=require('jsonwebtoken');
 
 router.post('/', (req, res, next)=> {
   const {username,password}=req.body;
-  Register.findOne({
-    username,
-  },(err,user)=>{
+  Register.findOne(
+    {username}
+  ,(err,user)=>{
     if(err)
     throw err;
     if(!user){
@@ -25,32 +25,29 @@ router.post('/', (req, res, next)=> {
             message:"Authentication failed,wrong password"
           })
           else{
-      
-            
             const payLoad={
               username
             };
-            const token=jwt.sign(payLoad,req.app.get('api_secret_key'),
-            
-            
+           jwt.sign(payLoad,process.env.API_SECRET_KEY,
             {
               expiresIn:720 //12 saat  
+            },(err,token)=>{
+              if(err)
+                next(err)
+              else{
+                res.cookie('x-access-token',token,{httpOnly:true,secure:false,maxAge: 43200000});
+                res.json({
+                  status:true,  
+                  token
+            })}
             });
-            res.json({
-              status:true,
-              token
-            })
-  
-            
           }
-        
         }).catch(err=>{
-         res.send(err)
+          next(err)
         })
       }
     }
   )
-
 });
 
 module.exports = router;

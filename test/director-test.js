@@ -14,9 +14,7 @@ describe('/api/directors tests',()=>{
             token=res.body.token;
             done();
         })
-
     })
-   
     
     describe("/GET director",()=>{
         it("GET all directors",(done)=>{

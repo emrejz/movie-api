@@ -12,7 +12,7 @@ router.post("/",(req,res,next)=>{
         res.json(data)
     })
     .catch(err=>{
-        res.json(err)
+        next(err)
     })
 
 })
@@ -55,7 +55,7 @@ router.get("/",(req,res,next)=>{
         res.json(data)
     })
     .catch(err=>{
-        res.json(err)
+        next(err)
     })
 });
 
@@ -101,7 +101,7 @@ router.get("/:directorId",(req,res,next)=>{
         res.json(data)
     })
     .catch(err=>{
-        res.json(err)
+        next(err)
     })
 })
 
@@ -119,7 +119,7 @@ const promise=Director.findByIdAndUpdate(
         res.json(data)
         
     }).catch(err=>{
-        res.json(err)
+        next(err)
     })
 })
 
@@ -132,7 +132,7 @@ router.delete('/:directorId',(req,res,next)=>{
         next({message:"Incorrect director parameter", code:3})
         res.json({status:1})
     }).catch(err=>{
-        res.json(err)
+        next(err)
     })
 })
 

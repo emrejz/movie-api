@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors')
+require('dotenv').config()
 
 const authenticateRouter = require('./routes/authenticate');
 const movieRouter = require('./routes/movie');
@@ -15,14 +17,16 @@ const verifyToken=require('./middleware/verify-token');
 
 const app = express();
 
+app.use(cors())
+
 //db connection
 const db=require('./helper/db');
 db();
 
 //apiSecretKey
-const config=require('./config');
+//const config=require('./config');
 
-app.set('api_secret_key',config.api_secret_key);
+//app.set('api_secret_key',config.api_secret_key);
 
 
 
@@ -38,6 +42,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/authenticate', authenticateRouter);
+
 app.use('/api',verifyToken);
 app.use('/api/movies', movieRouter);
 app.use('/api/directors',directorRouter);

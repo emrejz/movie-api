@@ -20,7 +20,7 @@ router.get('/',(req,res,next)=>{
     res.json(data)
   })
   .catch(err=>{
-    res.json(err)
+    next(err)
   })
 })
 router.get('/between/:start_year/:end_year',(req,res,next)=>{
@@ -33,7 +33,7 @@ router.get('/between/:start_year/:end_year',(req,res,next)=>{
     res.json(data)
   })
   .catch(err=>{
-    res.json(err)
+    next(err)
   })
 })
 router.get('/top10',(req,res,next)=>{
@@ -44,7 +44,7 @@ router.get('/top10',(req,res,next)=>{
     res.json(data)
   })
     .catch(err=>{
-      res.json(err)
+      next(err)
     })
 })
 
@@ -57,7 +57,7 @@ router.get('/:movie_id',(req,res,next)=>{
     res.json(data)
   })
   .catch(err=>{
-    res.json(err)
+    next(err)
   })
 })
 router.put('/:movie_id',(req,res,next)=>{
@@ -73,7 +73,7 @@ router.put('/:movie_id',(req,res,next)=>{
     res.json(data);
   })
   .catch(err=>{
-    res.json(err)
+    next(err)
   })
 })
 
@@ -85,7 +85,7 @@ router.delete('/:movie_id',(req,res,next)=>{
     res.json({status:1});
   })
   .catch(err=>{
-    res.json(err)
+    next(err)
   })
 })
 
