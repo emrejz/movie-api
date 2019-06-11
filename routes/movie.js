@@ -11,10 +11,17 @@ router.get('/',(req,res,next)=>{
       localField:"director_id",
       foreignField:"_id",
       as:'director'
-    } },
-    { $unwind:"$director"
- 
-    }
+    }},
+    { $unwind:{
+      path:"$director",
+      preserveNullAndEmptyArrays:true
+    }},
+    {$project:{
+      _id:'$_id',
+      title:'$title',
+      cover:'$cover',
+      director:'$director'
+    }}
   ]);
   promise.then(data=>{
     res.json(data)
