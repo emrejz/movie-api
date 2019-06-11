@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors');
 require('dotenv').config();
 
 const authenticateRouter = require('./routes/authenticate');
@@ -15,6 +16,7 @@ const indexRouter=require("./routes/index")
 const verifyToken=require('./middleware/verify-token');
 
 const app = express();
+app.use(cors())
 
 //db connection
 const db=require('./helper/db');
