@@ -6,7 +6,7 @@ JWT+bcryptjs+express+mongo used in this project.
 
 Mocha and chai used in this project for test.
 
-[Live demo on Heroku](https://pip.pypa.io/en/stable/)
+[Live demo on Heroku](https://movie-api-with-nodejs.herokuapp.com/)
 
 
 
