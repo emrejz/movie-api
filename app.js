@@ -4,21 +4,20 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const bodyParser = require('body-parser')
 require('dotenv').config();
-const app = express();
-app.use(cors())
+
 const authenticateRouter = require('./routes/authenticate');
 const movieRouter = require('./routes/movie');
 const directorRouter=require("./routes/director")
 const registerRouter=require("./routes/register")
 const indexRouter=require("./routes/index")
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+
 //middlevare verifyToken
 const verifyToken=require('./middleware/verify-token');
-
-
+const app = express();
+app.use(cors())
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 //db connection
 const db=require('./helper/db');
