@@ -30,7 +30,7 @@ router.post('/', (req, res, next)=> {
             };
             jwt.sign(payLoad,process.env.API_SECRET_KEY,
             {
-              expiresIn:720 //12 saat  
+              expiresIn:"24h" //12 saat  
             },(err,token)=>{
               if(err){
                 next(err)}
