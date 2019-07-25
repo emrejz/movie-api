@@ -15,7 +15,7 @@ const indexRouter=require("./routes/index")
 //middlevare verifyToken
 const verifyToken=require('./middleware/verify-token');
 const app = express();
-app.use(cors())
+app.use(cors({origin:true}))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
