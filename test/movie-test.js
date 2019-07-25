@@ -90,7 +90,8 @@
                 category:"TEST1",
                 country:"Turkey1",
                 year:2001,
-                imdb_score:2
+                imdb_score:2,
+                cover:"asd"
             }
              chai.request(server)
              .put('/api/movies/'+movie_id)
