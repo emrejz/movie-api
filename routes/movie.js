@@ -99,9 +99,9 @@ router.delete('/:movie_id',(req,res,next)=>{
 
 
 router.post('/', (req, res, next)=> {
-  const {title,imdb_score,category,country,year,director_id}=req.body;
-// const movie=new Movie(req.body);
-  const movie=new Movie({
+//  const {title,imdb_score,category,country,year,director_id}=req.body;
+ const movie=new Movie(req.body);
+  /*const movie=new Movie({
     director_id:director_id,
     title:title,
     imdb_score:imdb_score,
@@ -109,6 +109,7 @@ router.post('/', (req, res, next)=> {
     country:country,
     year:year,
   });
+  */
   const promise=movie.save();
    promise.then((data)=>{
      res.json(data)
