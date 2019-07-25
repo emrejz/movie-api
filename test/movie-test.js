@@ -38,7 +38,8 @@
                  category:"TEST",
                  country:"Turkey",
                  year:2000,
-                 imdb_score:1
+                 imdb_score:1,
+                 cover:"http://trinitytire.com/shows_images/workaholics-season-2-akp.png"
              }
              chai.request(server)
              .post("/api/movies")
@@ -53,6 +54,7 @@
                  res.body.should.have.property('year');
                  res.body.should.have.property('imdb_score');
                  res.body.should.have.property('country');
+                 res.body.should.have.property('cover');
                  movie_id=res.body._id;
                  done();
              })
@@ -73,6 +75,7 @@
                 res.body.should.have.property('year');
                 res.body.should.have.property('imdb_score');
                 res.body.should.have.property('country');
+                res.body.should.have.property('cover');
                 res.body.should.have.property('_id').eql(movie_id);
                 done();
 
@@ -100,6 +103,7 @@
                  res.body.should.have.property('year').eql(movie.year);
                  res.body.should.have.property('imdb_score').eql(movie.imdb_score);
                  res.body.should.have.property('country').eql(movie.country);
+                 res.body.should.have.property('cover').eql(movie.cover);
                  done()
              })
          })
