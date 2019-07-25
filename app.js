@@ -5,7 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
-
+const app = express();
+app.use(cors())
 const authenticateRouter = require('./routes/authenticate');
 const movieRouter = require('./routes/movie');
 const directorRouter=require("./routes/director")
@@ -15,8 +16,7 @@ const indexRouter=require("./routes/index")
 //middlevare verifyToken
 const verifyToken=require('./middleware/verify-token');
 
-const app = express();
-app.use(cors())
+
 
 //db connection
 const db=require('./helper/db');
