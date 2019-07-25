@@ -40,7 +40,11 @@ const MovieSchema=new Schema({
         trim: true
         
     },
-
+ cover:{
+        type:String,
+        required:[true, '`{PATH}` alanı boş olamaz'],
+        trim: true
+    },
     createdAt:{
         type:Date,
         default:Date.now
