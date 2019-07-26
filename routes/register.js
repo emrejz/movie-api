@@ -29,7 +29,7 @@ router.post("/", (req, res, next) => {
                   secure: false,
                   maxAge: 24 * 60 * 60 * 1000
                 });
-                res.json(username);
+                res.json(token);
               }
             }
           );
