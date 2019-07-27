@@ -68,7 +68,7 @@ router.post("/session", async (req, res, next) => {
       });
     }
   } catch (error) {
-    throw error;
+    res.json(error);
   }
 });
 module.exports = router;
