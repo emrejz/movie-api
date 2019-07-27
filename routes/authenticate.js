@@ -56,22 +56,23 @@ router.post("/", (req, res, next) => {
   );
 });
 router.post("/session", (req, res, next) => {
-const token=req.headers["x-access-token"];
- jwt.verify(token,process.env.API_SECRET_KEY,(err,decoded)=>{
-            if (err) {
-                res.json({
-                    status:false,
-                    message:"Failed to authenticate token"
-                })
-            }else{
-              res.json(decoded)
-            }
-        })
-    }else{
+  const token = req.headers["x-access-token"];
+  if (token) {
+    jwt.verify(token, process.env.API_SECRET_KEY, (err, decoded) => {
+      if (err) {
         res.json({
-            status:false,
-            message: "No token"
-        })
-    }
-})
+          status: false,
+          message: "Failed to authenticate token"
+        });
+      } else {
+        res.json(decoded);
+      }
+    });
+  } else {
+    res.json({
+      status: false,
+      message: "No token"
+    });
+  }
+});
 module.exports = router;
