@@ -55,24 +55,20 @@ router.post("/", (req, res, next) => {
     }
   );
 });
-router.post("/session", (req, res, next) => {
-  const token = req.headers["x-access-token"];
-  if (token) {
-    jwt.verify(token, process.env.API_SECRET_KEY, (err, decoded) => {
-      if (err) {
-        res.json({
-          status: false,
-          message: "Failed to authenticate token"
-        });
-      } else {
-        res.json(decoded);
-      }
-    });
-  } else {
-    res.json({
-      status: false,
-      message: "No token"
-    });
+router.post("/session", async (req, res, next) => {
+  try {
+    let token = req.body.token;
+    if (token) {
+      const decoded = await jwt.verify(token, process.env.API_SECRET_KEY);
+      res.json(decoded);
+    } else {
+      res.json({
+        status: false,
+        message: "No token"
+      });
+    }
+  } catch (error) {
+    throw error;
   }
 });
 module.exports = router;
