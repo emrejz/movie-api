@@ -10,13 +10,13 @@ router.post("/", (req, res, next) => {
   if (!(password.length <= 15 && password.length >= 3)) {
     res.json({
       error: {
-        password: "Password length must be between 3 and 15 character."
+        message: "Password length must be between 3 and 15 character."
       }
     });
   } else if (!(username.length <= 15 && username.length >= 3)) {
     res.json({
       error: {
-        username: "Username length must be between 3 and 15 character."
+        message: "Username length must be between 3 and 15 character."
       }
     });
   } else {
