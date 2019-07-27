@@ -34,7 +34,7 @@ router.get("/", (req, res, next) => {
       res.json(data);
     })
     .catch(err => {
-      res.json(err);
+      res.json({ error: err });
     });
 });
 router.get("/between/:start_year/:end_year", (req, res, next) => {
@@ -47,7 +47,7 @@ router.get("/between/:start_year/:end_year", (req, res, next) => {
       res.json(data);
     })
     .catch(err => {
-      res.json(err);
+      res.json({ error: err });
     });
 });
 router.get("/top10", (req, res, next) => {
@@ -56,11 +56,11 @@ router.get("/top10", (req, res, next) => {
     .limit(10);
   promise
     .then(data => {
-      if (!data) res.json({ message: "Top list was not found " });
+      if (!data) res.json({ error: { message: "Top list was not found " } });
       res.json(data);
     })
     .catch(err => {
-      res.json(err);
+      res.json({ error: err });
     });
 });
 
@@ -68,11 +68,12 @@ router.get("/:movie_id", (req, res, next) => {
   const promise = Movie.findById(req.params.movie_id);
   promise
     .then(data => {
-      if (!data) res.json({ message: "The movie was not found!", code: 1 });
+      if (!data)
+        res.json({ error: { message: "The movie was not found!", code: 1 } });
       res.json(data);
     })
     .catch(err => {
-      res.json(err);
+      res.json({ error: err });
     });
 });
 router.put("/:movie_id", (req, res, next) => {
@@ -81,11 +82,12 @@ router.put("/:movie_id", (req, res, next) => {
   });
   promise
     .then(data => {
-      if (!data) res.json({ message: "The movie was not found!", code: 1 });
+      if (!data)
+        res.json({ error: { message: "The movie was not found!", code: 1 } });
       res.json(data);
     })
     .catch(err => {
-      res.json(err);
+      res.json({ error: err });
     });
 });
 
@@ -93,11 +95,11 @@ router.delete("/:movie_id", (req, res, next) => {
   const promise = Movie.findByIdAndRemove(req.params.movie_id);
   promise
     .then(data => {
-      if (!data) res.json({ message: "The movie was not found!" });
+      if (!data) res.json({ error: { message: "The movie was not found!" } });
       res.json({ status: 1 });
     })
     .catch(err => {
-      res.json(err);
+      res.json({ error: err });
     });
 });
 
@@ -119,7 +121,7 @@ router.post("/", (req, res, next) => {
       res.json(data);
     })
     .catch(err => {
-      res.json(err);
+      res.json({ error: err });
     });
 });
 

@@ -11,11 +11,13 @@ router.post("/", (req, res, next) => {
       username
     },
     (err, user) => {
-      if (err) res.json(err);
+      if (err) res.json({ error: err });
       if (!user) {
         res.json({
-          status: false,
-          message: `Authentication failed,user not found!`
+          error: {
+            status: false,
+            message: `Authentication failed,user not found!`
+          }
         });
       } else {
         bcrypt
@@ -23,8 +25,10 @@ router.post("/", (req, res, next) => {
           .then(result => {
             if (!result)
               res.json({
-                status: false,
-                message: "Authentication failed,wrong password"
+                error: {
+                  status: false,
+                  message: "Authentication failed,wrong password"
+                }
               });
             else {
               const payLoad = {
@@ -38,7 +42,7 @@ router.post("/", (req, res, next) => {
                 },
                 (err, token) => {
                   if (err) {
-                    res.json(err);
+                    res.json({ error: err });
                   } else
                     res.json({
                       status: true,
@@ -49,7 +53,7 @@ router.post("/", (req, res, next) => {
             }
           })
           .catch(err => {
-            res.json(err);
+            res.json({ error: err });
           });
       }
     }
@@ -63,12 +67,14 @@ router.post("/session", async (req, res, next) => {
       res.json(decoded);
     } else {
       res.json({
-        status: false,
-        message: "No token"
+        error: {
+          status: false,
+          message: "No token"
+        }
       });
     }
   } catch (error) {
-    res.json(error);
+    res.json({ error: err });
   }
 });
 module.exports = router;

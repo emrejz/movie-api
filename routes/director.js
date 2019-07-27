@@ -13,7 +13,7 @@ router.post("/", (req, res, next) => {
       res.json(data);
     })
     .catch(err => {
-      res.json(err);
+      res.json({ error: err });
     });
 });
 
@@ -59,7 +59,7 @@ router.get("/", (req, res, next) => {
       res.json(data);
     })
     .catch(err => {
-      res.json(err);
+      res.json({ error: err });
     });
 });
 
@@ -111,7 +111,7 @@ router.get("/:directorId", (req, res, next) => {
       res.json(data);
     })
     .catch(err => {
-      res.json(err);
+      res.json({ error: err });
     });
 });
 
@@ -121,11 +121,14 @@ router.put("/:directorId", (req, res, next) => {
   });
   promise
     .then(data => {
-      if (!data) res.json({ message: "The director was not found!", code: 2 });
+      if (!data)
+        res.json({
+          error: { message: "The director was not found!", code: 2 }
+        });
       res.json(data);
     })
     .catch(err => {
-      res.json(err);
+      res.json({ error: err });
     });
 });
 
@@ -133,11 +136,14 @@ router.delete("/:directorId", (req, res, next) => {
   const promise = Director.findByIdAndRemove(req.params.directorId);
   promise
     .then(data => {
-      if (!data) res.json({ message: "Incorrect director parameter", code: 3 });
+      if (!data)
+        res.json({
+          error: { message: "Incorrect director parameter", code: 3 }
+        });
       res.json({ status: 1 });
     })
     .catch(err => {
-      res.json(err);
+      res.json({ error: err });
     });
 });
 
