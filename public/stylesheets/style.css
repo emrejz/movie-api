@@ -1,8 +1,15 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+  padding: 0;
+  margin: auto;
 }
-
-a {
-  color: #00B7FF;
+th {
+  background-color: rgb(246, 205, 100);
+  font-size: 30px;
+}
+td {
+  font-size: 17px;
+  padding: 5px;
+}
+tr {
+  background-color: rgba(253, 253, 253, 0.472);
 }

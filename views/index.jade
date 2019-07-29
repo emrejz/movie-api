@@ -1,5 +1,120 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to movie-api #{title}
+    table.egt
+      tbody
+        tr
+          th(colspan='4') MOVIES
+        tr
+          th Route
+          th HTTP Verb
+          th POST body
+          th Description
+        tr
+          td /api/movies
+          td GET
+          td Empty
+          td List all movies.
+        tr
+          td /api/movies
+          td POST
+          td
+            | {'title':'foo', 'category':'bar', 'country':'Turkey', year:1990,
+            | director_id:"id", imdb_score: 9.7 ,cover: pic.url }
+          td Create a new movie.
+        tr
+          td /api/movies/:movie_id
+          td GET
+          td
+            | Empty
+          td Get a movie.
+        tr
+          td /api/movies/:movie_id
+          td PUT
+          td
+            | {'title':'foo', 'category':'bar'}
+          td 	Update a movie with new info.
+        tr
+          td /api/movies/:movie_id
+          td DELETE
+          td
+            | Empty
+          td 	Delete a movie.
+        tr
+          td /api/movies/top10
+          td GET
+          td
+            | Empty
+          td 	Get the top 10 movies.
+        tr
+          td /api/movies/between/:start_year/:end_year
+          td GET
+          td
+            | Empty
+          td 	Movies between two dates.
+        tr
+          th(colspan='4') DIRECTORS
+        tr
+          th Route
+          th HTTP Verb
+          th POST body
+          th Description
+        tr
+          td /api/directors
+          td GET
+          td Empty
+          td 	List all directors.
+        tr
+          td /api/directors
+          td POST
+          td
+            | { name: 'foo', surname:'bar' }
+          td Create a new director.
+        tr
+          td /api/directors/:director_id
+          td GET
+          td
+            | Empty
+          td Get a director.
+        tr
+          td /api/directors/:director_id
+          td PUT
+          td
+            | {'name':'foo', 'surname':'bar'}
+          td Update a director with new info.
+        tr
+          td /api/directors/:director_id
+          td DELETE
+          td
+            | Empty
+          td 	Delete a director.
+        tr
+          td /api/directors/:director_id/best10movie
+          td GET
+          td
+            | Empty
+          td 	The director's top 10 films.
+        tr
+          th(colspan='4') SESSION
+        tr
+          th Route
+          th HTTP Verb
+          th POST body
+          th Description
+        tr
+          td /register
+          td POST
+          td { username: 'foo', password:'1234' }
+          td 	Create a new user.
+        tr
+          td /authenticate
+          td POST
+          td
+            | { name: 'foo', surname:'bar' }
+          td Generate a token.
+        tr
+          td /authenticate/session
+          td POST
+          td
+            | { token: 'foo' } or headers['x-access-token']='foo'
+          td Verify token.
