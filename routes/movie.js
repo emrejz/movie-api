@@ -25,6 +25,8 @@ router.get("/", (req, res, next) => {
         _id: "$_id",
         title: "$title",
         cover: "$cover",
+        year: "$year",
+        imdb_score: "$imdb_score",
         director: "$director"
       }
     }
